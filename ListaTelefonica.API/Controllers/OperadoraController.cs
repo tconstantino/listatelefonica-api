@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Repository;
 
 namespace ListaTelefonica.API.Controllers
@@ -16,20 +17,22 @@ namespace ListaTelefonica.API.Controllers
 
         private IOperadoraRepository OperadoraRepository { get; set; }
 
-        // GET: Operadora
-        public ActionResult Index()
+        // GET: /Operadora/{id}
+        public ActionResult Index(Int32 Identificador)
         {
             return Content(OperadoraRepository.ObterPeloID().Nome);
         }
 
-        // GET: Operadora/Details/5
-        public ActionResult Details(int id)
+        // POST: /Operadora/
+        [HttpPost]
+        public ActionResult Index(Operadora operadora)
         {
             return View();
         }
 
         // GET: Operadora/Create
-        public ActionResult Create()
+        [HttpPut]
+        public ActionResult Index(Operadora operadora)
         {
             return View();
         }
