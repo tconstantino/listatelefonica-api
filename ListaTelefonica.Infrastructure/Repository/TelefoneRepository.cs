@@ -5,7 +5,7 @@ using ListaTelefonica.Domain.Repository;
 
 namespace ListaTelefonica.Infrastructure.Repository
 {
-    public class OperadoraRepository : IOperadoraRepository
+    public class TelefoneRepository : ITelefoneRepository
     {
         public void Editar()
         {
@@ -22,12 +22,12 @@ namespace ListaTelefonica.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Operadora ObterPeloID()
+        public Telefone ObterPeloID()
         {
-            return new Operadora();
+            throw new NotImplementedException();
         }
 
-        public IList<Operadora> ObterTodos()
+        public IList<Telefone> ObterTodos()
         {
             throw new NotImplementedException();
         }

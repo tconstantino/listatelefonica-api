@@ -19,7 +19,7 @@ namespace ListaTelefonica.API.Controllers
         // GET: Operadora
         public ActionResult Index()
         {
-            return View();
+            return Content(OperadoraRepository.ObterPeloID().Nome);
         }
 
         // GET: Operadora/Details/5

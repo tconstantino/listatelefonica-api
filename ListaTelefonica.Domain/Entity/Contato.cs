@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ListaTelefonica.Domain.Entity
 {
     public class Contato
     {
+        public Int64 Identificador { get; set; }
+        public String Nome { get; set; }
+        public Telefone Telefone { get; set; }
+        public DateTime DataInclusao { get; set; }
+        public String Cor { get; set; }
     }
 }

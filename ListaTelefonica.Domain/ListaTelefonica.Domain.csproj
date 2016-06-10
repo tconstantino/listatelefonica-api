@@ -40,12 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Categoria.cs" />
     <Compile Include="Entity\Contato.cs" />
     <Compile Include="Entity\Operadora.cs" />
+    <Compile Include="Entity\Telefone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ICategoriaRepository.cs" />
     <Compile Include="Repository\IContatoRepository.cs" />
     <Compile Include="Repository\IOperadoraRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\ITelefoneRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
