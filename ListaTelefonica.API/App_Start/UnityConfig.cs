@@ -11,7 +11,8 @@ namespace ListaTelefonica.API
         public static void RegisterComponents()
         {
 			var container = new UnityContainer();
-                        
+
+            container.RegisterType<IContextoDB, ContextoDB>();            
             container.RegisterType<IContatoRepository, ContatoRepository>();
             container.RegisterType<IOperadoraRepository, OperadoraRepository>();
 

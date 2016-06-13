@@ -5,37 +5,32 @@ using System.Web;
 using System.Web.Mvc;
 using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Repository;
+using ListaTelefonica.Infrastructure;
+using ListaTelefonica.Infrastructure.Repository;
 
 namespace ListaTelefonica.API.Controllers
 {
     public class OperadoraController : Controller
-    {
-        public OperadoraController(IOperadoraRepository operadoraRepository)
-        {
-            OperadoraRepository = operadoraRepository;
-        }
-
+    {        
         private IOperadoraRepository OperadoraRepository { get; set; }
 
         // GET: /Operadora/{id}
-        public ActionResult Index(Int32 Identificador)
+        public ActionResult Index()
         {
-            return Content(OperadoraRepository.ObterPeloID().Nome);
+            var teste = new Class1();
+            teste.TESTE();
+                return Content("OK");
+            
         }
 
-        // POST: /Operadora/
-        [HttpPost]
-        public ActionResult Index(Operadora operadora)
-        {
-            return View();
-        }
+       
 
         // GET: Operadora/Create
-        [HttpPut]
-        public ActionResult Index(Operadora operadora)
-        {
-            return View();
-        }
+        //[HttpPut]
+        //public ActionResult Index(Operadora operadora)
+        //{
+        //    return View();
+        //}
 
         // POST: Operadora/Create
         [HttpPost]

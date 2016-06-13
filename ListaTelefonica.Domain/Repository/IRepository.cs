@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ListaTelefonica.Domain.Repository
 {
     public interface IRepository<T> where T : class
-    {
+    {        
         IList<T> ObterTodos();
-        T ObterPeloID();
-        void Inserir();
-        void Editar();
-        void Excluir();
+        T ObterPeloID(Int64 id);
+        void Inserir(T entity);
+        void Atualizar(T entity);
+        void Excluir(T entity);
     }
 }
