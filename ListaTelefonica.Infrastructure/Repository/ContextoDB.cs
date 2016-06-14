@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Repository;
+using ListaTelefonica.Infrastructure.Mapping;
 
 namespace ListaTelefonica.Infrastructure.Repository
 {
@@ -65,6 +66,14 @@ namespace ListaTelefonica.Infrastructure.Repository
         {
             this.Set<T>().Remove(entity);
             this.SaveChanges();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Configurations.Add(new CategoriaMapping());
+            modelBuilder.Configurations.Add(new OperadoraMapping());
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Contato> Contato { get; set; }
