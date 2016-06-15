@@ -8,13 +8,14 @@ namespace ListaTelefonica.Infrastructure.Mapping
         public OperadoraMapping()
         {
             this.ToTable("Operadora");
-
+            this.HasKey(o => o.OperadoraID);
             this.Property(o => o.OperadoraID).HasColumnName("Identificador");
             this.Property(o => o.Codigo).HasColumnName("Codigo");
             this.Property(o => o.Nome).HasColumnName("Nome");
             this.Property(o => o.Preco).HasColumnName("Preco");
-            //this.HasRequired(o => o.Categoria)
-            //    .WithMany(c => c.Operadoras);
+            this.HasRequired(o => o.Categoria)
+                .WithMany(c => c.Operadoras)
+                .Map(o => o.MapKey("Categoria_ID"));
 
         }
     }

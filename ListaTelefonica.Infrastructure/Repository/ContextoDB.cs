@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Repository;
@@ -70,16 +71,14 @@ namespace ListaTelefonica.Infrastructure.Repository
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Configurations.Add(new CategoriaMapping());
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Configurations.Add(new CategoriaMapping());
             modelBuilder.Configurations.Add(new OperadoraMapping());
+            
 
             base.OnModelCreating(modelBuilder);
         }
-
-        public DbSet<Contato> Contato { get; set; }
-        public DbSet<Telefone> Telefone { get; set; }
-        public DbSet<Operadora> Operadora { get; set; }
-        public DbSet<Categoria> Categoria { get; set; }
-        
+       
+        public DbSet<Operadora> operadoras { get { operadoras.Include(o => o.Categoria); return operadoras; } set { operadoras = value; } }
     }
 }

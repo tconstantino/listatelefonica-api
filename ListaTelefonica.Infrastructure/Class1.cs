@@ -12,16 +12,14 @@ namespace ListaTelefonica.Infrastructure
     {
         public void TESTE()
         {
-            using (var con = new ContextoDB())
+            using (ContextoDB contexto = new ContextoDB())
             {
-
-
-                var a = con.Set<Operadora>();
-
-                var operadoras = con.Operadora.ToList();
-
-                var b = operadoras;
+                var operadoras = contexto.Set<Operadora>();
+                var operadoras2 = contexto.operadoras;
+                var categoria = operadoras.First().Categoria;
+                var nomeDaCategoria = categoria.Nome;
             }
         }
     }
 }
+		

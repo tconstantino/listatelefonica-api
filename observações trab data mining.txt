@@ -1,0 +1,14 @@
+Vizinhos mais próximos
+Classificador NaiveBayes
+Árvore de Decisão
+Regressão Logística
+Redes neurais artificiais
+
+Procurar técnicas de aprendizado não-supervisionados que permitam formas de transformação e redução de dimensionalidade nos dados.
+
+Métricas:
+Tabela de confusão
+Acurácia
+Taxa de erro
+Precisão
+Cobertura
