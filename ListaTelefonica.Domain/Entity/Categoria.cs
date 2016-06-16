@@ -5,8 +5,8 @@ namespace ListaTelefonica.Domain.Entity
 {
     public class Categoria
     {
-        public Int64 CategoriaID { get; set; }
+        public Int64 Identificador { get; set; }
         public String Nome { get; set; }  
-        public IList<Operadora> Operadoras { get; set; }
+        public virtual IList<Operadora> Operadoras { get; set; }
     }
 }

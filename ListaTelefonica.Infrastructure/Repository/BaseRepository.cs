@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Repository;
 
 namespace ListaTelefonica.Infrastructure.Repository
@@ -14,39 +12,33 @@ namespace ListaTelefonica.Infrastructure.Repository
             ContextoDB = contextoDB;
         }
 
-        private IContextoDB ContextoDB { get; set; }
+        protected IContextoDB ContextoDB { get; set; }
+        
+        protected IQueryable<T> Query { get { return ContextoDB.Query<T>(); } }
 
-        private T t { get; }
-
-        public T ObterPeloID(Int64 id)
-        {            
-            var tipo = t.GetType();
-            var prop = tipo.GetRuntimeProperty("Identificador");
-            var val = prop.GetValue(t);
-
-            return ContextoDB.Query<T>().Where(t => (Int64)t.GetType().GetRuntimeProperty("Identificador").GetValue(t) == id).FirstOrDefault();
+        public virtual T ObterPeloID(Int64 id)
+        {
+            return ContextoDB.ObterPelaPK<T>(id);
         }
 
-        public IList<T> ObterTodos()
+        public virtual IList<T> ObterTodos()
         {
             return ContextoDB.Query<T>().ToList();
         }
 
-        public void Inserir(T entity)
+        public virtual void Inserir(T entity)
         {
             ContextoDB.Inserir<T>(entity);
         }
 
-        public void Atualizar(T entity)
+        public virtual void Atualizar(T entity)
         {
             ContextoDB.Atualizar<T>(entity);
         }
 
-        public void Excluir(T entity)
+        public virtual void Excluir(T entity)
         {
             ContextoDB.Excluir<T>(entity);
-        }
+        }        
     }
-
-
 }

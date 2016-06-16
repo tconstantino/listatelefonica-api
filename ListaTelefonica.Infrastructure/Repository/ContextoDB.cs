@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Repository;
 using ListaTelefonica.Infrastructure.Mapping;
 
@@ -14,9 +13,13 @@ namespace ListaTelefonica.Infrastructure.Repository
 
         private DbContextTransaction Transacao { get; set; }
 
+        public T ObterPelaPK<T>(params object[] pk) where T : class
+        {
+            return this.Set<T>().Find(pk);
+        }
+
         public IQueryable<T> Query<T>() where T : class
         {
-            var retorno = this.Set<T>();
             return this.Set<T>();
         }
 
@@ -73,12 +76,12 @@ namespace ListaTelefonica.Infrastructure.Repository
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.Add(new CategoriaMapping());
+            modelBuilder.Configurations.Add(new ContatoMapping());
             modelBuilder.Configurations.Add(new OperadoraMapping());
-            
+            modelBuilder.Configurations.Add(new TelefoneMapping());
+
 
             base.OnModelCreating(modelBuilder);
-        }
-       
-        public DbSet<Operadora> operadoras { get { operadoras.Include(o => o.Categoria); return operadoras; } set { operadoras = value; } }
+        }        
     }
 }
