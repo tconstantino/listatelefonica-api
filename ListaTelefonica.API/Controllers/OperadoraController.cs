@@ -1,95 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
+using ListaTelefonica.Application;
 using ListaTelefonica.Domain.Entity;
-using ListaTelefonica.Domain.Repository;
-using ListaTelefonica.Infrastructure;
-using ListaTelefonica.Infrastructure.Repository;
 
 namespace ListaTelefonica.API.Controllers
 {
-    public class OperadoraController : Controller
-    {        
-        private IOperadoraRepository OperadoraRepository { get; set; }
-
-        // GET: /Operadora/{id}
-        public ActionResult Index()
+    public class OperadoraController : ApiController
+    {
+        public OperadoraController()
         {
-            var teste = new Class1();
-            teste.TESTE();
-                return Content("OK");
+            OperadoraApp = new OperadoraApp();
+        }
+
+        private OperadoraApp OperadoraApp;    
             
-        }
-
-       
-
-        // GET: Operadora/Create
-        //[HttpPut]
-        //public ActionResult Index(Operadora operadora)
-        //{
-        //    return View();
-        //}
-
-        // POST: Operadora/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        // GET: /Operadora/{id}        
+        public Operadora Get(Int64 id)
         {
-            try
+            var operadoraEncontrada = OperadoraApp.ObterPeloId(id);
+            return new Operadora()
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Operadora/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Operadora/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Operadora/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Operadora/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                Identificador = operadoraEncontrada.Identificador,
+                Nome = operadoraEncontrada.Nome,
+                Preco = operadoraEncontrada.Preco
+            };
+        }       
+        
     }
 }

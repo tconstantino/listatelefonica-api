@@ -3,9 +3,9 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using ListaTelefonica.Domain.Repository;
-using ListaTelefonica.Infrastructure.Mapping;
+using ListaTelefonica.Infrastructure.Configuration;
 
-namespace ListaTelefonica.Infrastructure.Repository
+namespace ListaTelefonica.Infrastructure.Context
 {
     public class ContextoDB : DbContext, IContextoDB
     {
@@ -75,13 +75,8 @@ namespace ListaTelefonica.Infrastructure.Repository
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Configurations.Add(new CategoriaMapping());
-            modelBuilder.Configurations.Add(new ContatoMapping());
-            modelBuilder.Configurations.Add(new OperadoraMapping());
-            modelBuilder.Configurations.Add(new TelefoneMapping());
-
-
+            MappingConfiguration.Configurar(modelBuilder);
             base.OnModelCreating(modelBuilder);
-        }        
+        }
     }
 }

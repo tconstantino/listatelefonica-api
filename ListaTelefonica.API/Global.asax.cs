@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ListaTelefonica.CrossCuting.DependencyInjection;
 
 namespace ListaTelefonica.API
 {
@@ -10,11 +11,11 @@ namespace ListaTelefonica.API
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);            
-            UnityConfig.RegisterComponents();
-
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ContainerDI.RegisterElements();
         }
     }
 }

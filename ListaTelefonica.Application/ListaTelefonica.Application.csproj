@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OperadoraApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ListaTelefonica.CrossCuting\ListaTelefonica.CrossCuting.csproj">
+      <Project>{D61A417A-0037-4C3D-A6DF-244487686695}</Project>
+      <Name>ListaTelefonica.CrossCuting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ListaTelefonica.Domain\ListaTelefonica.Domain.csproj">
+      <Project>{82316745-5F04-4D5F-9487-2F49091AA5CF}</Project>
+      <Name>ListaTelefonica.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
