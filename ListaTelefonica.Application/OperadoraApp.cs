@@ -24,5 +24,20 @@ namespace ListaTelefonica.Application
             var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
             return operadoraRepository.ObterPeloID(id);
         }
+
+        public void Inserir(Operadora operadora)
+        {
+
+        }
+
+        public void Atualizar(Operadora operadora)
+        {
+
+        }
+
+        public void Excluir(Operadora operadora)
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
-using System.Web.Mvc;
+using ListaTelefonica.API.Extensions.Models;
+using ListaTelefonica.API.Models;
 using ListaTelefonica.Application;
 using ListaTelefonica.Domain.Entity;
 
@@ -16,16 +17,29 @@ namespace ListaTelefonica.API.Controllers
         private OperadoraApp OperadoraApp;    
             
         // GET: /Operadora/{id}        
-        public Operadora Get(Int64 id)
+        public OperadoraModel Get(Int64 id)
         {
-            var operadoraEncontrada = OperadoraApp.ObterPeloId(id);
-            return new Operadora()
-            {
-                Identificador = operadoraEncontrada.Identificador,
-                Nome = operadoraEncontrada.Nome,
-                Preco = operadoraEncontrada.Preco
-            };
+            Operadora operadora = OperadoraApp.ObterPeloId(id);
+
+            if (operadora == null) return null;
+
+            return operadora.ToModel();
         }       
         
+        // POST: /Operadora
+        public void Post(OperadoraModel operadora)
+        {
+            OperadoraApp.Inserir(operadora.ToDomain());
+        }
+
+        public void Put(OperadoraModel operadora)
+        {
+            OperadoraApp.Atualizar(operadora.ToDomain());
+        }
+
+        public void Delete(OperadoraModel operadora)
+        {
+            OperadoraApp.Excluir(operadora.ToDomain());
+        }
     }
 }
