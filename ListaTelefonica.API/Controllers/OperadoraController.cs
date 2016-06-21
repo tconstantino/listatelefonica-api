@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using ListaTelefonica.API.Extensions.Models;
 using ListaTelefonica.API.Models;
@@ -14,14 +15,20 @@ namespace ListaTelefonica.API.Controllers
             OperadoraApp = new OperadoraApp();
         }
 
-        private OperadoraApp OperadoraApp;    
-            
+        private OperadoraApp OperadoraApp;
+
+        // GET: /Operadora      
+        public IList<OperadoraModel> Get()
+        {
+            IList<Operadora> operadoras = OperadoraApp.ObterTodos();
+
+            return operadoras.ToModel();
+        }
+
         // GET: /Operadora/{id}        
         public OperadoraModel Get(Int64 id)
         {
             Operadora operadora = OperadoraApp.ObterPeloId(id);
-
-            if (operadora == null) return null;
 
             return operadora.ToModel();
         }       
@@ -37,9 +44,9 @@ namespace ListaTelefonica.API.Controllers
             OperadoraApp.Atualizar(operadora.ToDomain());
         }
 
-        public void Delete(OperadoraModel operadora)
+        public void Delete(Int64 id)
         {
-            OperadoraApp.Excluir(operadora.ToDomain());
+            OperadoraApp.Excluir(id);
         }
     }
 }

@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaApp.cs" />
+    <Compile Include="ContatoApp.cs" />
     <Compile Include="OperadoraApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelefoneApp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListaTelefonica.CrossCuting\ListaTelefonica.CrossCuting.csproj">

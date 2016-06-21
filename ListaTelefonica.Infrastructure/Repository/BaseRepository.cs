@@ -16,6 +16,11 @@ namespace ListaTelefonica.Infrastructure.Repository
         
         protected IQueryable<T> Query { get { return ContextoDB.Query<T>(); } }
 
+        protected IQueryable<T2> GenericQuery<T2>() where T2 : class
+        {
+            return ContextoDB.Query<T2>();
+        }
+
         public virtual T ObterPeloID(Int64 id)
         {
             return ContextoDB.ObterPelaPK<T>(id);

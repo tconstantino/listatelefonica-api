@@ -10,6 +10,8 @@ namespace ListaTelefonica.API.Extensions.Models
     {
         public static Contato ToDomain(this ContatoModel model)
         {
+            if (model == null) return null;
+
             return new Contato()
             {
                 Identificador = model.Identificador,
@@ -22,6 +24,8 @@ namespace ListaTelefonica.API.Extensions.Models
 
         public static ContatoModel ToModel(this Contato domain)
         {
+            if (domain == null) return null;
+
             return new ContatoModel()
             {
                 Identificador = domain.Identificador,
@@ -34,11 +38,15 @@ namespace ListaTelefonica.API.Extensions.Models
 
         public static IList<Contato> ToDomain(this IList<ContatoModel> model)
         {
+            if (model == null) return null;
+
             return model.Select(m => m.ToDomain()).ToList();
         }
 
         public static IList<ContatoModel> ToModel(this IList<Contato> domain)
         {
+            if (domain == null) return null;
+
             return domain.Select(d => d.ToModel()).ToList();
         }
     }

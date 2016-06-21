@@ -44,6 +44,7 @@
     <Compile Include="Entity\Contato.cs" />
     <Compile Include="Entity\Operadora.cs" />
     <Compile Include="Entity\Telefone.cs" />
+    <Compile Include="Extension\MessageExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ICategoriaRepository.cs" />
     <Compile Include="Repository\IContatoRepository.cs" />
@@ -51,9 +52,28 @@
     <Compile Include="Repository\IOperadoraRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ITelefoneRepository.cs" />
-    <Compile Include="Service\TesteService.cs" />
+    <Compile Include="Resource\MessageResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CRUD\CategoriaCRUDService.cs" />
+    <Compile Include="Service\CRUD\CRUDService.cs" />
+    <Compile Include="Service\CRUD\OperadoraCRUDService.cs" />
+    <Compile Include="Service\CRUD\TelefoneCRUDService.cs" />
+    <Compile Include="Service\Validation\CategoriaValidationService.cs" />
+    <Compile Include="Service\Validation\OperadoraValidationService.cs" />
+    <Compile Include="Service\Validation\TelefoneValidationService.cs" />
+    <Compile Include="Utils\Message.cs" />
+    <Compile Include="Utils\UtilsEnum\StatusMessageEnum.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\MessageResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

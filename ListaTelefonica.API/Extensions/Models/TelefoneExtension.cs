@@ -9,6 +9,8 @@ namespace ListaTelefonica.API.Extensions.Models
     {
         public static Telefone ToDomain(this TelefoneModel model)
         {
+            if (model == null) return null;
+
             return new Telefone()
             {
                 Identificador = model.Identificador,
@@ -19,6 +21,8 @@ namespace ListaTelefonica.API.Extensions.Models
 
         public static TelefoneModel ToModel(this Telefone domain)
         {
+            if (domain == null) return null;
+
             return new TelefoneModel()
             {
                 Identificador = domain.Identificador,
@@ -29,11 +33,15 @@ namespace ListaTelefonica.API.Extensions.Models
 
         public static IList<Telefone> ToDomain(this IList<TelefoneModel> model)
         {
+            if (model == null) return null;
+
             return model.Select(m => m.ToDomain()).ToList();
         }
 
         public static IList<TelefoneModel> ToModel(this IList<Telefone> domain)
         {
+            if (domain == null) return null;
+
             return domain.Select(d => d.ToModel()).ToList();
         }
     }

@@ -9,6 +9,8 @@ namespace ListaTelefonica.API.Extensions.Models
     {
         public static Operadora ToDomain(this OperadoraModel model)
         {
+            if (model == null) return null;
+
             return new Operadora()
             {
                 Identificador = model.Identificador,
@@ -20,7 +22,9 @@ namespace ListaTelefonica.API.Extensions.Models
         }
 
         public static OperadoraModel ToModel(this Operadora domain)
-        {            
+        {
+            if (domain == null) return null;
+
             return new OperadoraModel()
             {
                 Identificador = domain.Identificador,
@@ -33,11 +37,15 @@ namespace ListaTelefonica.API.Extensions.Models
 
         public static IList<Operadora> ToDomain(this IList<OperadoraModel> model)
         {
+            if (model == null) return null;
+
             return model.Select(m => m.ToDomain()).ToList();
         }
 
         public static IList<OperadoraModel> ToModel(this IList<Operadora> domain)
         {
+            if (domain == null) return null;
+
             return domain.Select(d => d.ToModel()).ToList();
         }
     }
