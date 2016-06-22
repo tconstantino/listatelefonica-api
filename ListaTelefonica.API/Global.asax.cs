@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ListaTelefonica.CrossCuting.DependencyInjection;
+using ListaTelefonica.CrossCuting.Factory;
 
 namespace ListaTelefonica.API
 {
@@ -16,6 +17,12 @@ namespace ListaTelefonica.API
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ContainerDI.RegisterElements();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            ContextFactory.DefaultContext.Dispose();
         }
     }
 }

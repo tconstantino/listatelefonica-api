@@ -20,46 +20,42 @@ namespace ListaTelefonica.Application
 
         public Operadora ObterPeloId(Int64 id)
         {
-            using (IContextoDB context = ContextFactory.Create<IContextoDB>())
-            {
-                var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
-                return operadoraRepository.ObterPeloID(id);
-            }
+            IContextoDB context = ContextFactory.Create<IContextoDB>();
+
+            var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
+            return operadoraRepository.ObterPeloID(id);
         }
 
         public void Inserir(Operadora operadora)
         {
-            using (IContextoDB context = ContextFactory.Create<IContextoDB>())
-            {
-                var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
-                OperadoraCRUDService crudService = new OperadoraCRUDService();
+            IContextoDB context = ContextFactory.Create<IContextoDB>();
 
-                crudService.Inserir(operadora, operadoraRepository, context);
-            }
+            var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
+            OperadoraCRUDService crudService = new OperadoraCRUDService();
+
+            crudService.Inserir(operadora, operadoraRepository, context);
         }
 
         public void Atualizar(Operadora operadora)
         {
-            using (IContextoDB context = ContextFactory.Create<IContextoDB>())
-            {
-                var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
-                OperadoraCRUDService crudService = new OperadoraCRUDService();
+            IContextoDB context = ContextFactory.Create<IContextoDB>();
 
-                crudService.Atualizar(operadora, operadoraRepository, context);
-            }
+            var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
+            OperadoraCRUDService crudService = new OperadoraCRUDService();
+
+            crudService.Atualizar(operadora, operadoraRepository, context);
         }
 
         public void Excluir(Int64 idOperadora)
         {
-            using (IContextoDB context = ContextFactory.Create<IContextoDB>())
-            {
-                var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
-                Operadora operadora = operadoraRepository.ObterPeloID(idOperadora);
+            IContextoDB context = ContextFactory.Create<IContextoDB>();
 
-                OperadoraCRUDService crudService = new OperadoraCRUDService();
+            var operadoraRepository = RepositoryFactory.Create<IOperadoraRepository>(context);
+            Operadora operadora = operadoraRepository.ObterPeloID(idOperadora);
 
-                crudService.Excluir(operadora, operadoraRepository, context);
-            }
+            OperadoraCRUDService crudService = new OperadoraCRUDService();
+
+            crudService.Excluir(operadora, operadoraRepository, context);
         }
     }
 }

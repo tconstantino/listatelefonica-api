@@ -19,7 +19,7 @@ namespace ListaTelefonica.API.Controllers
         // GET: api/Categoria
         public IEnumerable<CategoriaModel> Get()
         {
-            IList<Telefone> categorias = CategoriaApp.ObterTodas();
+            IList<Categoria> categorias = CategoriaApp.ObterTodas();
 
             return categorias.ToModel();
         }
@@ -27,7 +27,7 @@ namespace ListaTelefonica.API.Controllers
         // GET: api/Categoria/5
         public CategoriaModel Get(int id)
         {
-            Telefone categoria = CategoriaApp.ObterPeloId(id);
+            Categoria categoria = CategoriaApp.ObterPeloId(id);
 
             return categoria.ToModel();
         }

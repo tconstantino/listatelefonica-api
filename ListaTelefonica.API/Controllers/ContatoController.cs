@@ -1,39 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using ListaTelefonica.API.Extensions.Models;
+using ListaTelefonica.API.Models;
+using ListaTelefonica.Application;
+using ListaTelefonica.Domain.Entity;
 
 namespace ListaTelefonica.API.Controllers
 {
     public class ContatoController : ApiController
     {
-        // GET: api/Contato
-        public IEnumerable<string> Get()
+        public ContatoController()
         {
-            return new string[] { "value1", "value2" };
+            ContatoApp = new ContatoApp();
+        }
+
+        private ContatoApp ContatoApp { get; set; }
+
+        // GET: api/Contato
+        public IList<ContatoModel> Get()
+        {
+            IList<Contato> contatos = ContatoApp.ObterTodos();
+
+            return contatos.ToModel();
         }
 
         // GET: api/Contato/5
-        public string Get(int id)
+        public ContatoModel Get(long id)
         {
-            return "value";
+            Contato contato = ContatoApp.ObterPeloId(id);
+
+            return contato.ToModel();
         }
 
         // POST: api/Contato
-        public void Post([FromBody]string value)
+        public void Post(ContatoModel contato)
         {
+            ContatoApp.Inserir(contato.ToDomain());
         }
 
         // PUT: api/Contato/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(ContatoModel contato)
         {
+            ContatoApp.Atualizar(contato.ToDomain());
         }
 
         // DELETE: api/Contato/5
-        public void Delete(int id)
+        public void Delete(long id)
         {
+            ContatoApp.Excluir(id);
         }
     }
 }

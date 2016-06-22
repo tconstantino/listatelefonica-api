@@ -5,7 +5,7 @@ using ListaTelefonica.Domain.Repository;
 
 namespace ListaTelefonica.Infrastructure.Repository
 {
-    public class CategoriaRepository : BaseRepository<Telefone>, ICategoriaRepository
+    public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
     {
        public CategoriaRepository(IContextoDB contextoDB) : base(contextoDB) { }
 

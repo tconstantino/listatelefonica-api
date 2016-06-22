@@ -3,7 +3,7 @@ using ListaTelefonica.Domain.Entity;
 
 namespace ListaTelefonica.Infrastructure.Mapping
 {
-    public class CategoriaMapping : EntityTypeConfiguration<Telefone>
+    public class CategoriaMapping : EntityTypeConfiguration<Categoria>
     {
         public CategoriaMapping()
         {

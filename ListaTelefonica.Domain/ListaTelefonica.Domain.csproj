@@ -58,10 +58,12 @@
       <DependentUpon>MessageResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Service\CRUD\CategoriaCRUDService.cs" />
+    <Compile Include="Service\CRUD\ContatoCRUDService.cs" />
     <Compile Include="Service\CRUD\CRUDService.cs" />
     <Compile Include="Service\CRUD\OperadoraCRUDService.cs" />
     <Compile Include="Service\CRUD\TelefoneCRUDService.cs" />
     <Compile Include="Service\Validation\CategoriaValidationService.cs" />
+    <Compile Include="Service\Validation\ContatoValidationService.cs" />
     <Compile Include="Service\Validation\OperadoraValidationService.cs" />
     <Compile Include="Service\Validation\TelefoneValidationService.cs" />
     <Compile Include="Utils\Message.cs" />

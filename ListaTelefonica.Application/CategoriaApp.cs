@@ -9,56 +9,52 @@ namespace ListaTelefonica.Application
 {
     public class CategoriaApp
     {
-        public IList<Telefone> ObterTodas()
+        public IList<Categoria> ObterTodas()
         {
-            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
-            {
-                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
-                return repository.ObterTodos();
-            }
+            IContextoDB contextoDB = ContextFactory.Create<IContextoDB>();
+
+            ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+            return repository.ObterTodos();
         }
 
-        public Telefone ObterPeloId(Int64 id)
+        public Categoria ObterPeloId(Int64 id)
         {
-            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
-            {
-                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
-                return repository.ObterPeloID(id);
-            }
+            IContextoDB contextoDB = ContextFactory.Create<IContextoDB>();
+
+            ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+            return repository.ObterPeloID(id);
         }
 
-        public void Inserir(Telefone categoria)
+        public void Inserir(Categoria categoria)
         {
-            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
-            {
-                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+            IContextoDB contextoDB = ContextFactory.Create<IContextoDB>();
 
-                CategoriaCRUDService crudService = new CategoriaCRUDService();
-                crudService.Inserir(categoria, repository, contextoDB);
-            }
+            ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+
+            CategoriaCRUDService crudService = new CategoriaCRUDService();
+            crudService.Inserir(categoria, repository, contextoDB);
         }
 
-        public void Atualizar(Telefone categoria)
+        public void Atualizar(Categoria categoria)
         {
-            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
-            {
-                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+            IContextoDB contextoDB = ContextFactory.Create<IContextoDB>();
 
-                CategoriaCRUDService crudService = new CategoriaCRUDService();
-                crudService.Atualizar(categoria, repository, contextoDB);
-            }
+            ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+
+            CategoriaCRUDService crudService = new CategoriaCRUDService();
+            crudService.Atualizar(categoria, repository, contextoDB);
         }
 
         public void Excluir(Int64 idCategoria)
         {
-            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
-            {
-                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
-                Telefone categoria = repository.ObterPeloID(idCategoria);
+            IContextoDB contextoDB = ContextFactory.Create<IContextoDB>();
 
-                CategoriaCRUDService crudService = new CategoriaCRUDService();
-                crudService.Excluir(categoria, repository, contextoDB);
-            }
+            ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+            Categoria categoria = repository.ObterPeloID(idCategoria);
+
+            CategoriaCRUDService crudService = new CategoriaCRUDService();
+            crudService.Excluir(categoria, repository, contextoDB);
+
         }
     }
 }

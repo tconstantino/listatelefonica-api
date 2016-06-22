@@ -7,18 +7,18 @@ namespace ListaTelefonica.API.Extensions.Models
 {
     public static class CategoriaExtension
     {
-        public static Telefone ToDomain(this CategoriaModel model)
+        public static Categoria ToDomain(this CategoriaModel model)
         {
             if (model == null) return null;
 
-            return new Telefone()
+            return new Categoria()
             {
                 Identificador = model.Identificador,
                 Nome = model.Nome
             };
         }
 
-        public static CategoriaModel ToModel(this Telefone domain)
+        public static CategoriaModel ToModel(this Categoria domain)
         {
             if (domain == null) return null;
 
@@ -29,14 +29,14 @@ namespace ListaTelefonica.API.Extensions.Models
             };
         }
 
-        public static IList<Telefone> ToDomain(this IList<CategoriaModel> model)
+        public static IList<Categoria> ToDomain(this IList<CategoriaModel> model)
         {
             if (model == null) return null;
 
             return model.Select(m => m.ToDomain()).ToList();
         }
 
-        public static IList<CategoriaModel> ToModel(this IList<Telefone> domain)
+        public static IList<CategoriaModel> ToModel(this IList<Categoria> domain)
         {
             if (domain == null) return null;
 

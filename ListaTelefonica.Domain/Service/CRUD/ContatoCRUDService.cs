@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Extension;
 using ListaTelefonica.Domain.Repository;
@@ -13,11 +10,11 @@ using ListaTelefonica.Domain.Utils.UtilsEnum;
 
 namespace ListaTelefonica.Domain.Service.CRUD
 {
-    public class TelefoneCRUDService : CRUDService<Telefone>
+    public class ContatoCRUDService : CRUDService<Contato>
     {
-        public override IList<Message> Inserir(Telefone entity, IRepository<Telefone> repository, IContextoDB contextoDB)
+        public override IList<Message> Inserir(Contato entity, IRepository<Contato> repository, IContextoDB contextoDB)
         {
-            TelefoneValidationService validation = new TelefoneValidationService();
+            ContatoValidationService validation = new ContatoValidationService();
             IList<Message> messages = validation.ValidateEntity(entity);
 
             if (messages.HasError()) return messages;
@@ -47,9 +44,9 @@ namespace ListaTelefonica.Domain.Service.CRUD
             return messages;
         }
 
-        public override IList<Message> Atualizar(Telefone entity, IRepository<Telefone> repository, IContextoDB contextoDB)
+        public override IList<Message> Atualizar(Contato entity, IRepository<Contato> repository, IContextoDB contextoDB)
         {
-            TelefoneValidationService validation = new TelefoneValidationService();
+            ContatoValidationService validation = new ContatoValidationService();
             IList<Message> messages = validation.ValidateEntity(entity);
 
             if (messages.HasError()) return messages;
@@ -79,10 +76,10 @@ namespace ListaTelefonica.Domain.Service.CRUD
             return messages;
         }
 
-        public override IList<Message> Excluir(Telefone entity, IRepository<Telefone> repository, IContextoDB contextoDB)
+        public override IList<Message> Excluir(Contato entity, IRepository<Contato> repository, IContextoDB contextoDB)
         {
-            TelefoneValidationService validation = new TelefoneValidationService();
-            IList<Message> messages = validation.ValidateEntityDeletion(entity, (ITelefoneRepository)repository);
+            ContatoValidationService validation = new ContatoValidationService();
+            IList<Message> messages = validation.ValidateEntityDeletion(entity, (IContatoRepository)repository);
 
             if (messages.HasError()) return messages;
 
@@ -102,7 +99,8 @@ namespace ListaTelefonica.Domain.Service.CRUD
             {
                 contextoDB.Rollback();
 
-                messages.Add(new Message
+                messages.Add
+                    (new Message
                     (String.Format(MessageResource.ErroOcorrido, ex.Message)
                     , StatusMessageEnum.Error));
             }

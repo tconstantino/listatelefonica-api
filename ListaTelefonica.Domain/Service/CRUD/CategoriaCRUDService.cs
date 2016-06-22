@@ -10,11 +10,11 @@ using ListaTelefonica.Domain.Utils.UtilsEnum;
 
 namespace ListaTelefonica.Domain.Service.CRUD
 {
-    public class CategoriaCRUDService : CRUDService<Telefone>
+    public class CategoriaCRUDService : CRUDService<Categoria>
     {
-        public override IList<Message> Inserir(Telefone entity, IRepository<Telefone> repository, IContextoDB contextoDB)
+        public override IList<Message> Inserir(Categoria entity, IRepository<Categoria> repository, IContextoDB contextoDB)
         {
-            TelefoneValidationService validation = new TelefoneValidationService();
+            CategoriaValidationService validation = new CategoriaValidationService();
             IList<Message> messages = validation.ValidateEntity(entity);
 
             if (messages.HasError()) return messages;
@@ -44,9 +44,9 @@ namespace ListaTelefonica.Domain.Service.CRUD
             return messages;
         }
 
-        public override IList<Message> Atualizar(Telefone entity, IRepository<Telefone> repository, IContextoDB contextoDB)
+        public override IList<Message> Atualizar(Categoria entity, IRepository<Categoria> repository, IContextoDB contextoDB)
         {
-            TelefoneValidationService validation = new TelefoneValidationService();
+            CategoriaValidationService validation = new CategoriaValidationService();
             IList<Message> messages = validation.ValidateEntity(entity);
 
             if (messages.HasError()) return messages;
@@ -76,9 +76,9 @@ namespace ListaTelefonica.Domain.Service.CRUD
             return messages;
         }
 
-        public override IList<Message> Excluir(Telefone entity, IRepository<Telefone> repository, IContextoDB contextoDB)
+        public override IList<Message> Excluir(Categoria entity, IRepository<Categoria> repository, IContextoDB contextoDB)
         {
-            TelefoneValidationService validation = new TelefoneValidationService();
+            CategoriaValidationService validation = new CategoriaValidationService();
             IList<Message> messages = validation.ValidateEntityDeletion(entity, (ICategoriaRepository)repository);
 
             if (messages.HasError()) return messages;

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using ListaTelefonica.API.Extensions.Models;
+using ListaTelefonica.API.Models;
 using ListaTelefonica.Application;
+using ListaTelefonica.Domain.Entity;
 
 namespace ListaTelefonica.API.Controllers
 {
@@ -18,29 +18,32 @@ namespace ListaTelefonica.API.Controllers
         private TelefoneApp TelefoneApp { get; set; }
 
         // GET: api/Telefone
-        public IEnumerable<string> Get()
+        public IList<TelefoneModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            IList<Telefone> telefones = TelefoneApp.ObterTodos();
+            return telefones.ToModel();
         }
 
         // GET: api/Telefone/5
-        public string Get(int id)
+        public TelefoneModel Get(Int64 id)
         {
-            return "value";
+            Telefone telefone = TelefoneApp.ObterPeloId(id);
+
+            return telefone.ToModel();
         }
 
         // POST: api/Telefone
-        public void Post([FromBody]string value)
+        public void Post(TelefoneModel telefone)
         {
         }
 
         // PUT: api/Telefone/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(TelefoneModel telefone)
         {
         }
 
         // DELETE: api/Telefone/5
-        public void Delete(int id)
+        public void Delete(Int64 id)
         {
         }
     }
