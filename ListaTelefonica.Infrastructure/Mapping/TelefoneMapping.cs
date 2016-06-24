@@ -12,6 +12,8 @@ namespace ListaTelefonica.Infrastructure.Mapping
             this.Property(t => t.Identificador).HasColumnName("Identificador");
             this.Property(t => t.Numero).HasColumnName("Numero");
 
+            
+
             //Many-To-One
             this.HasRequired(t => t.Operadora)
                 .WithMany(o => o.Telefones)

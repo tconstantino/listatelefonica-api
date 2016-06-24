@@ -22,7 +22,7 @@ namespace ListaTelefonica.Infrastructure.Mapping
             //Many-To-One
             this.HasMany(o => o.Telefones)
                 .WithRequired(t => t.Operadora)
-                .Map(t => t.MapKey("Operadora_ID"));
+                .Map(t => t.MapKey("Operadora_ID"));                
         }
     }
 }

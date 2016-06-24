@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ListaTelefonica.API.Models;
+using ListaTelefonica.CrossCuting.Factory;
 using ListaTelefonica.Domain.Entity;
+using ListaTelefonica.Domain.Repository;
 
 namespace ListaTelefonica.API.Extensions.Models
 {
@@ -9,13 +11,13 @@ namespace ListaTelefonica.API.Extensions.Models
     {
         public static Telefone ToDomain(this TelefoneModel model)
         {
-            if (model == null) return null;
+            if (model == null) return null;           
 
             return new Telefone()
             {
                 Identificador = model.Identificador,
                 Numero = model.Numero,
-                Operadora = model.Operadora.ToDomain()                
+                Operadora = model.Operadora.ToDomain()
             };
         }
 

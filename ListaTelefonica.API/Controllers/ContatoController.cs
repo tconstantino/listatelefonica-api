@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ListaTelefonica.API.Extensions.Models;
 using ListaTelefonica.API.Models;
 using ListaTelefonica.Application;
@@ -7,8 +8,9 @@ using ListaTelefonica.Domain.Entity;
 
 namespace ListaTelefonica.API.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class ContatoController : ApiController
-    {
+    {        
         public ContatoController()
         {
             ContatoApp = new ContatoApp();
@@ -45,7 +47,7 @@ namespace ListaTelefonica.API.Controllers
         }
 
         // DELETE: api/Contato/5
-        public void Delete(long id)
+        public void Delete(int id, [FromBody]ContatoModel contato)
         {
             ContatoApp.Excluir(id);
         }

@@ -56,7 +56,7 @@ namespace ListaTelefonica.Infrastructure.Context
 
         public void Inserir<T>(T entity) where T : class
         {
-            this.Set<T>().Add(entity);
+            this.Set<T>().Add(entity);            
             this.SaveChanges();
         }
 
@@ -75,6 +75,7 @@ namespace ListaTelefonica.Infrastructure.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
             MappingConfiguration.Configurar(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }

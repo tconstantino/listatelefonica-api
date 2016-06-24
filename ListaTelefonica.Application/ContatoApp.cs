@@ -27,6 +27,8 @@ namespace ListaTelefonica.Application
         {
             IContextoDB contextoDB = ContextFactory.DefaultContext;
             IContatoRepository repository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
+            var op = RepositoryFactory.Create<IOperadoraRepository>(contextoDB).ObterPeloID(contato.Telefone.Operadora.Identificador);
+            contato.Telefone.Operadora = op;
 
             ContatoCRUDService crudService = new ContatoCRUDService();
             crudService.Inserir(contato, repository, contextoDB);            
@@ -45,11 +47,12 @@ namespace ListaTelefonica.Application
         {
             IContextoDB contextoDB = ContextFactory.DefaultContext;
             IContatoRepository repository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
-
+            
             Contato contato = repository.ObterPeloID(idContato);
-
+                        
             ContatoCRUDService crudService = new ContatoCRUDService();
             crudService.Excluir(contato, repository, contextoDB);
+            
         }
     }
 }

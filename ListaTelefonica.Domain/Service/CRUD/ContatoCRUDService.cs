@@ -86,7 +86,7 @@ namespace ListaTelefonica.Domain.Service.CRUD
             try
             {
                 contextoDB.IniciarTransacao();
-
+                
                 repository.Excluir(entity);
 
                 contextoDB.Commit();

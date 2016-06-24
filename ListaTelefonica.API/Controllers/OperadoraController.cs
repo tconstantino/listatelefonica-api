@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ListaTelefonica.API.Extensions.Models;
 using ListaTelefonica.API.Models;
 using ListaTelefonica.Application;
@@ -8,6 +9,7 @@ using ListaTelefonica.Domain.Entity;
 
 namespace ListaTelefonica.API.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class OperadoraController : ApiController
     {
         public OperadoraController()

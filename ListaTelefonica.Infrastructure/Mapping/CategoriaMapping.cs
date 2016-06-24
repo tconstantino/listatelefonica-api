@@ -12,9 +12,9 @@ namespace ListaTelefonica.Infrastructure.Mapping
             this.Property(c => c.Identificador).HasColumnName("Identificador");
             this.Property(c => c.Nome).HasColumnName("Nome");
 
-            //Many-To-One
+            //One-To-Many
             this.HasMany(c => c.Operadoras)
-                .WithRequired(o => o.Categoria)                
+                .WithRequired(o => o.Categoria)
                 .Map(o => o.MapKey("Categoria_ID"));
         }
     }
