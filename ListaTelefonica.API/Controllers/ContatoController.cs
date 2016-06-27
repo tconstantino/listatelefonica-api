@@ -60,7 +60,11 @@ namespace ListaTelefonica.API.Controllers
                 contatoRepository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
                 IOperadoraRepository operadorarepository = RepositoryFactory.Create<IOperadoraRepository>(contextoDB);
 
-                contatoDomain.Telefone.Operadora = operadorarepository.ObterPeloID(contatoDomain.Telefone.Operadora.Identificador);
+                contatoDomain.Telefone.Operadora = null;
+                if (contato.Telefone.Operadora != null)
+                {
+                    contatoDomain.Telefone.Operadora = operadorarepository.ObterPeloID(contato.Telefone.Operadora.Identificador);
+                }
 
                 contatoCrudService = new ContatoCRUDService();
 
