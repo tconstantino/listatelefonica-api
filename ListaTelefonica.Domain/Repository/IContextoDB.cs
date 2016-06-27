@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ListaTelefonica.Domain.Repository
 {
-    public interface IContextoDB
+    public interface IContextoDB : IDisposable
     {
         void IniciarTransacao();
         void Commit();
@@ -13,6 +13,5 @@ namespace ListaTelefonica.Domain.Repository
         void Inserir<T>(T entity) where T : class;
         void Atualizar<T>(T entity) where T : class;
         void Excluir<T>(T entity) where T : class;
-        void Dispose();       
     }
 }
