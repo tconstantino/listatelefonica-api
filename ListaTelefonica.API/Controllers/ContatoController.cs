@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 using ListaTelefonica.API.Extensions;
 using ListaTelefonica.API.Extensions.Models;
 using ListaTelefonica.API.Models;
@@ -80,7 +84,7 @@ namespace ListaTelefonica.API.Controllers
         }
 
         // PUT: api/Contato/5
-        public IHttpActionResult Put(ContatoModel contato)
+        public HttpResponseMessage Put(ContatoModel contato)
         {
             using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
             {
@@ -89,36 +93,36 @@ namespace ListaTelefonica.API.Controllers
 
                 IList<Message> mensagens = contatoCrudService.Atualizar(contatoDomain, contatoRepository, contextoDB);
 
-                if (mensagens.HasError()) return BadRequest(mensagens.ToJSON());
-
-                return Ok(mensagens.ToJSON());
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, contato);                                
+                
+                return this.OkResponse(mensagens, contato);
             }
         }
-               
+
         // DELETE: api/Contato?id=5
-        public IHttpActionResult Delete([FromUri] int[] ids)
+        public HttpResponseMessage Delete([FromUri] int[] ids)
         {
-            if (ids == null || ids.Length == 0) return NotFound();
+            if (ids == null || ids.Length == 0) return this.NotFoundResponse(null, ids);
 
             using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
             {
                 contatoRepository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
 
                 IList<Contato> contatos = new List<Contato>();
-                //int[] ids = new int[10];
+
                 foreach (int id in ids)
                 {
                     contatos.Add(contatoRepository.ObterPeloID(id));
                 }
-                                
+
                 contatoCrudService = new ContatoCRUDService();
 
                 IList<Message> mensagens = contatoCrudService.Excluir(contatos, contatoRepository, contextoDB);
 
-                if (mensagens.HasError()) return BadRequest(mensagens.ToJSON());
-
-                return Ok(mensagens.ToJSON());
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, ids);
+                
+                return this.OkResponse(mensagens, ids);
             }
-        }
-    }
+        }        
+    }    
 }

@@ -181,6 +181,7 @@
     <Compile Include="Controllers\ContatoController.cs" />
     <Compile Include="Controllers\OperadoraController.cs" />
     <Compile Include="Controllers\TelefoneController.cs" />
+    <Compile Include="Extensions\ApiControllerExtension.cs" />
     <Compile Include="Extensions\JsonObjectExtension.cs" />
     <Compile Include="Extensions\Models\CategoriaExtension.cs" />
     <Compile Include="Extensions\Models\ContatoExtension.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\CategoriaModel.cs" />
     <Compile Include="Models\ContatoModel.cs" />
     <Compile Include="Models\OperadoraModel.cs" />
+    <Compile Include="Models\ResponseObject.cs" />
     <Compile Include="Models\TelefoneModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
