@@ -216,10 +216,6 @@
     <Folder Include="Views\Operadora\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ListaTelefonica.Application\ListaTelefonica.Application.csproj">
-      <Project>{57a16886-0c39-4e76-8f67-088cfd944f86}</Project>
-      <Name>ListaTelefonica.Application</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ListaTelefonica.CrossCuting\ListaTelefonica.CrossCuting.csproj">
       <Project>{d61a417a-0037-4c3d-a6df-244487686695}</Project>
       <Name>ListaTelefonica.CrossCuting</Name>

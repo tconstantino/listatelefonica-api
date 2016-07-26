@@ -108,5 +108,45 @@ namespace ListaTelefonica.Domain.Service.CRUD
 
             return messages;
         }
+
+        public IList<Message> Excluir(IList<Operadora> entities, IRepository<Operadora> repository, IContextoDB contextoDB)
+        {
+            OperadoraValidationService validation = new OperadoraValidationService();
+            List<Message> messages = new List<Message>();
+
+            try
+            {
+                contextoDB.IniciarTransacao();
+
+                foreach (Operadora entity in entities)
+                {
+                    messages.AddRange(validation.ValidateEntityDeletion(entity, (IOperadoraRepository)repository));
+                    repository.Excluir(entity);
+                }
+
+                if (messages.HasError())
+                {
+                    contextoDB.Rollback();
+                    return messages;
+                }
+
+                contextoDB.Commit();
+
+                messages.Add(new Message
+                    (MessageResource.SucessoNaOperacao
+                    , StatusMessageEnum.Success));
+            }
+            catch (Exception ex)
+            {
+                contextoDB.Rollback();
+
+                messages.Add
+                    (new Message
+                    (String.Format(MessageResource.ErroOcorrido, ex.Message)
+                    , StatusMessageEnum.Error));
+            }
+
+            return messages;
+        }
     }
 }

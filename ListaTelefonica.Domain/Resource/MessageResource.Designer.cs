@@ -22,7 +22,7 @@ namespace ListaTelefonica.Domain.Resource {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MessageResource {
+    public class MessageResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace ListaTelefonica.Domain.Resource {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ListaTelefonica.Domain.Resource.MessageResource", typeof(MessageResource).Assembly);
@@ -51,7 +51,7 @@ namespace ListaTelefonica.Domain.Resource {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace ListaTelefonica.Domain.Resource {
         /// <summary>
         ///   Looks up a localized string similar to {0} é obrigatório..
         /// </summary>
-        internal static string CampoObrigatorio {
+        public static string CampoObrigatorio {
             get {
                 return ResourceManager.GetString("CampoObrigatorio", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace ListaTelefonica.Domain.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Ocorreu o erro: {0}..
         /// </summary>
-        internal static string ErroOcorrido {
+        public static string ErroOcorrido {
             get {
                 return ResourceManager.GetString("ErroOcorrido", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace ListaTelefonica.Domain.Resource {
         /// <summary>
         ///   Looks up a localized string similar to {0} possui {1} associados(as).
         /// </summary>
-        internal static string PossuiDependentes {
+        public static string PossuiDependentes {
             get {
                 return ResourceManager.GetString("PossuiDependentes", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace ListaTelefonica.Domain.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Feito com sucesso!.
         /// </summary>
-        internal static string SucessoNaOperacao {
+        public static string SucessoNaOperacao {
             get {
                 return ResourceManager.GetString("SucessoNaOperacao", resourceCulture);
             }

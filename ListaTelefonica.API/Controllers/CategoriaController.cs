@@ -1,55 +1,120 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using ListaTelefonica.API.Extensions;
 using ListaTelefonica.API.Extensions.Models;
 using ListaTelefonica.API.Models;
-using ListaTelefonica.Application;
+using ListaTelefonica.CrossCuting.Factory;
 using ListaTelefonica.Domain.Entity;
+using ListaTelefonica.Domain.Extension;
+using ListaTelefonica.Domain.Repository;
+using ListaTelefonica.Domain.Resource;
+using ListaTelefonica.Domain.Service.CRUD;
+using ListaTelefonica.Domain.Utils;
+using ListaTelefonica.Domain.Utils.UtilsEnum;
 
 namespace ListaTelefonica.API.Controllers
 {
     [EnableCors("*", "*", "*")]
     public class CategoriaController : ApiController
     {
-        public CategoriaController()
-        {
-            CategoriaApp = new CategoriaApp();
-        }
-
-        private CategoriaApp CategoriaApp { get; set; }
-
         // GET: api/Categoria
-        public IEnumerable<CategoriaModel> Get()
+        public HttpResponseMessage Get()
         {
-            IList<Categoria> categorias = CategoriaApp.ObterTodas();
+            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
+            {
+                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+                IList<Categoria> categorias = repository.ObterTodos();
 
-            return categorias.ToModel();
+                if (categorias == null) return this.NotFoundResponse();
+
+                IList<Message> mensagens = new List<Message>();
+                mensagens.Add(new Message(MessageResource.SucessoNaOperacao, StatusMessageEnum.Success));
+
+                return this.OkResponse(mensagens, categorias.ToModel());
+            }
         }
 
         // GET: api/Categoria/5
-        public CategoriaModel Get(int id)
+        public HttpResponseMessage Get(long id)
         {
-            Categoria categoria = CategoriaApp.ObterPeloId(id);
+            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
+            {
+                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+                Categoria categoria = repository.ObterPeloID(id);
 
-            return categoria.ToModel();
+                if (categoria == null) return this.NotFoundResponse(null, id);
+
+                IList<Message> mensagens = new List<Message>();
+                mensagens.Add(new Message(MessageResource.SucessoNaOperacao, StatusMessageEnum.Success));
+
+                return this.OkResponse(mensagens, categoria.ToModel());
+            }
         }
 
         // POST: api/Categoria
-        public void Post(CategoriaModel categoria)
+        public HttpResponseMessage Post(CategoriaModel categoria)
         {
-            CategoriaApp.Inserir(categoria.ToDomain());
+            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
+            {
+                Categoria categoriaDomain = categoria.ToDomain();
+                ICategoriaRepository repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+                                
+                var crudService = new CategoriaCRUDService();
+
+                IList<Message> mensagens = crudService.Inserir(categoriaDomain, repository, contextoDB);
+                
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, categoria);
+
+                String location = string.Concat(this.Url.Request.RequestUri, "/", categoriaDomain.Identificador);
+
+                return this.CreatedResponse(mensagens, categoriaDomain.ToModel(), location);
+            }
         }
 
         // PUT: api/Categoria/5
-        public void Put(CategoriaModel categoria)
+        public HttpResponseMessage Put(CategoriaModel categoria)
         {
-            CategoriaApp.Atualizar(categoria.ToDomain());
+            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
+            {
+                Categoria categoriaDomain = categoria.ToDomain();
+                var crudService = new CategoriaCRUDService();
+                var repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+
+                IList<Message> mensagens = crudService.Atualizar(categoriaDomain, repository, contextoDB);
+
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, categoria);
+
+                return this.OkResponse(mensagens, categoriaDomain.ToModel());
+            }
         }
 
         // DELETE: api/Categoria/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete([FromUri] int[] ids)
         {
-            CategoriaApp.Excluir(id);
+            if (ids == null || ids.Length == 0) return this.NotFoundResponse(null, ids);
+
+            using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
+            {
+                var repository = RepositoryFactory.Create<ICategoriaRepository>(contextoDB);
+
+                IList<Categoria> categorias = new List<Categoria>();
+
+                foreach (int id in ids)
+                {
+                    categorias.Add(repository.ObterPeloID(id));
+                }
+                
+                var crudService = new CategoriaCRUDService();
+                
+                IList<Message> mensagens = crudService.Excluir(categorias, repository, contextoDB);
+
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, ids);
+
+                return this.OkResponse(mensagens, ids);
+            }
         }
     }
 }

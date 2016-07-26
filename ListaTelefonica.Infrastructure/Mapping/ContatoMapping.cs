@@ -13,6 +13,11 @@ namespace ListaTelefonica.Infrastructure.Mapping
             this.Property(c => c.Nome).HasColumnName("Nome");
             this.Property(c => c.Cor).HasColumnName("Cor");
             this.Property(c => c.DataInclusao).HasColumnName("DataInclusao");
+            this.Property(c => c.Serial).HasColumnName("Serial");
+            this.Property(c => c.DataNascimento).HasColumnName("DataNascimento");
+            this.Property(c => c.CPF).HasColumnName("CPF");
+            this.Property(c => c.CNPJ).HasColumnName("CNPJ");
+            this.Property(c => c.CEP).HasColumnName("CEP");
 
             this.HasOptional(c => c.Telefone)
                 .WithOptionalDependent(t => t.Contato)

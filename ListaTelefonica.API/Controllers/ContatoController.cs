@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Http.Results;
 using ListaTelefonica.API.Extensions;
 using ListaTelefonica.API.Extensions.Models;
 using ListaTelefonica.API.Models;
@@ -13,8 +10,10 @@ using ListaTelefonica.CrossCuting.Factory;
 using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Extension;
 using ListaTelefonica.Domain.Repository;
+using ListaTelefonica.Domain.Resource;
 using ListaTelefonica.Domain.Service.CRUD;
 using ListaTelefonica.Domain.Utils;
+using ListaTelefonica.Domain.Utils.UtilsEnum;
 
 namespace ListaTelefonica.API.Controllers
 {
@@ -24,39 +23,41 @@ namespace ListaTelefonica.API.Controllers
         private IContatoRepository contatoRepository;
         private ContatoCRUDService contatoCrudService;
         // GET: api/Contato
-        public IHttpActionResult Get()
+        public HttpResponseMessage Get()
         {
             using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
             {
                 contatoRepository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
                 IList<Contato> contatos = contatoRepository.ObterTodos();
 
-                if (contatos == null) NotFound();
+                if (contatos == null) this.NotFoundResponse();
 
-                return Ok(contatos.ToModel());
+                IList<Message> mensagens = new List<Message>();
+                mensagens.Add(new Message(MessageResource.SucessoNaOperacao, StatusMessageEnum.Success));
+
+                return this.OkResponse(mensagens, contatos.ToModel());
             }
         }
 
         // GET: api/Contato/5
-        public IHttpActionResult Get(long id)
+        public HttpResponseMessage Get(long id)
         {
             using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
             {
                 contatoRepository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
                 Contato contato = contatoRepository.ObterPeloID(id);
-                contatoCrudService = new ContatoCRUDService();
 
-                IList<Message> mensagens = contatoCrudService.Inserir(contato, contatoRepository, contextoDB);
+                if (contato == null) return this.NotFoundResponse(null, id);
 
+                IList<Message> mensagens = new List<Message>();
+                mensagens.Add(new Message(MessageResource.SucessoNaOperacao, StatusMessageEnum.Success));
 
-                if (mensagens.HasError()) return NotFound();
-
-                return Ok(contato.ToModel());
+                return this.OkResponse(mensagens, contato.ToModel());
             }
         }
 
         // POST: api/Contato
-        public IHttpActionResult Post(ContatoModel contato)
+        public HttpResponseMessage Post(ContatoModel contato)
         {
             using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
             {
@@ -75,11 +76,11 @@ namespace ListaTelefonica.API.Controllers
                 IList<Message> mensagens = contatoCrudService.Inserir(contatoDomain, contatoRepository, contextoDB);
 
 
-                if (mensagens.HasError()) return BadRequest(mensagens.ToJSON());
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, contato);
 
                 String location = string.Concat(this.Url.Request.RequestUri, "/", contatoDomain.Identificador);
 
-                return Created(location, new { obj = contatoDomain.ToModel(), msg = mensagens });
+                return this.CreatedResponse(mensagens, contatoDomain.ToModel(), location);
             }
         }
 
@@ -90,6 +91,8 @@ namespace ListaTelefonica.API.Controllers
             {
                 Contato contatoDomain = contato.ToDomain();
                 contatoCrudService = new ContatoCRUDService();
+
+                contatoRepository = RepositoryFactory.Create<IContatoRepository>(contextoDB);
 
                 IList<Message> mensagens = contatoCrudService.Atualizar(contatoDomain, contatoRepository, contextoDB);
 

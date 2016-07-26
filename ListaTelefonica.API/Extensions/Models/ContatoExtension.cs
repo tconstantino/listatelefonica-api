@@ -18,7 +18,12 @@ namespace ListaTelefonica.API.Extensions.Models
                 Nome = model.Nome,
                 Telefone = model.Telefone.ToDomain(),
                 Cor = model.Cor,
-                DataInclusao = DateTime.Now
+                DataInclusao = DateTime.Now,
+                Serial = model.Serial,
+                DataNascimento = model.DataNascimento,
+                CPF = model.CPF,
+                CNPJ = model.CNPJ,
+                CEP = model.CEP
             };
         }
 
@@ -32,7 +37,12 @@ namespace ListaTelefonica.API.Extensions.Models
                 Nome = domain.Nome,
                 Telefone = domain.Telefone.ToModel(),
                 Cor = domain.Cor,
-                DataInclusao = domain.DataInclusao
+                DataInclusao = domain.DataInclusao,
+                Serial = domain.Serial,
+                DataNascimento = domain.DataNascimento,
+                CPF = domain.CPF,
+                CNPJ = domain.CNPJ,
+                CEP = domain.CEP
             };
         }
 
