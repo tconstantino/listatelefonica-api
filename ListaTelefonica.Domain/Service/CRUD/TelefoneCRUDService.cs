@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ListaTelefonica.Domain.Entity;
 using ListaTelefonica.Domain.Extension;
 using ListaTelefonica.Domain.Repository;
@@ -103,6 +100,46 @@ namespace ListaTelefonica.Domain.Service.CRUD
                 contextoDB.Rollback();
 
                 messages.Add(new Message
+                    (String.Format(MessageResource.ErroOcorrido, ex.Message)
+                    , StatusMessageEnum.Error));
+            }
+
+            return messages;
+        }
+
+        public IList<Message> Excluir(IList<Telefone> entities, IRepository<Telefone> repository, IContextoDB contextoDB)
+        {
+            TelefoneValidationService validation = new TelefoneValidationService();
+            List<Message> messages = new List<Message>();
+
+            try
+            {
+                contextoDB.IniciarTransacao();
+
+                foreach (Telefone entity in entities)
+                {
+                    messages.AddRange(validation.ValidateEntityDeletion(entity, (ITelefoneRepository)repository));
+                    repository.Excluir(entity);
+                }
+
+                if (messages.HasError())
+                {
+                    contextoDB.Rollback();
+                    return messages;
+                }
+
+                contextoDB.Commit();
+
+                messages.Add(new Message
+                    (MessageResource.SucessoNaOperacao
+                    , StatusMessageEnum.Success));
+            }
+            catch (Exception ex)
+            {
+                contextoDB.Rollback();
+
+                messages.Add
+                    (new Message
                     (String.Format(MessageResource.ErroOcorrido, ex.Message)
                     , StatusMessageEnum.Error));
             }
