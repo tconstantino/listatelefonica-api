@@ -112,15 +112,16 @@ namespace ListaTelefonica.Domain.Service.CRUD
         {
             ContatoValidationService validation = new ContatoValidationService();
             List<Message> messages = new List<Message>();
-            
+            IContatoRepository castedRepository = (IContatoRepository)repository;
+
             try
             {
                 contextoDB.IniciarTransacao();
 
                 foreach (Contato entity in entities)
                 {
-                    messages.AddRange(validation.ValidateEntityDeletion(entity, (IContatoRepository)repository));
-                    repository.Excluir(entity);
+                    messages.AddRange(validation.ValidateEntityDeletion(entity, castedRepository));
+                    castedRepository.ExcluirComTelefoneDependente(entity);                    
                 }
 
                 if (messages.HasError())
@@ -147,5 +148,7 @@ namespace ListaTelefonica.Domain.Service.CRUD
 
             return messages;
         }
+        
+        
     }
 }

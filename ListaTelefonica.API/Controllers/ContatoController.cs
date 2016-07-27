@@ -96,8 +96,8 @@ namespace ListaTelefonica.API.Controllers
 
                 IList<Message> mensagens = contatoCrudService.Atualizar(contatoDomain, contatoRepository, contextoDB);
 
-                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, contato);                                
-                
+                if (mensagens.HasError()) return this.BadRequestResponse(mensagens, contato);
+
                 return this.OkResponse(mensagens, contato);
             }
         }
@@ -123,9 +123,9 @@ namespace ListaTelefonica.API.Controllers
                 IList<Message> mensagens = contatoCrudService.Excluir(contatos, contatoRepository, contextoDB);
 
                 if (mensagens.HasError()) return this.BadRequestResponse(mensagens, ids);
-                
+
                 return this.OkResponse(mensagens, ids);
             }
-        }        
-    }    
+        }
+    }
 }

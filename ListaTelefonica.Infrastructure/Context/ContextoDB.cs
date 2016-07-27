@@ -74,7 +74,7 @@ namespace ListaTelefonica.Infrastructure.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();            
 
             MappingConfiguration.Configurar(modelBuilder);
             base.OnModelCreating(modelBuilder);

@@ -7,7 +7,6 @@ GO
 CREATE TABLE Contato(
 	Identificador BigInt Identity(1,1) not null,
 	Nome Varchar(100) not null,
-	Telefone_ID BigInt not null,
 	DataInclusao Date not null,
 	Cor Varchar(30) not null
 )
@@ -15,6 +14,7 @@ CREATE TABLE Contato(
 CREATE TABLE Telefone(
 	Identificador Bigint Identity(1,1) not null,
 	Numero BigInt not null,
+	Contato_ID BigInt not null,
 	Operadora_ID BigInt not null
 )
 

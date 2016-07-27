@@ -17,11 +17,7 @@ namespace ListaTelefonica.Infrastructure.Mapping
             this.Property(c => c.DataNascimento).HasColumnName("DataNascimento");
             this.Property(c => c.CPF).HasColumnName("CPF");
             this.Property(c => c.CNPJ).HasColumnName("CNPJ");
-            this.Property(c => c.CEP).HasColumnName("CEP");
-
-            this.HasOptional(c => c.Telefone)
-                .WithOptionalDependent(t => t.Contato)
-                .Map(c => c.MapKey("Telefone_ID"));
+            this.Property(c => c.CEP).HasColumnName("CEP");            
         }
     }
 }

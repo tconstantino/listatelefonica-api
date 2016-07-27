@@ -16,10 +16,10 @@ ADD Constraint Operadora_ID
 Primary Key (Identificador);
 
 
-ALTER TABLE Contato
-ADD Constraint Contato_Telefone_FK
-Foreign Key (Telefone_ID)
-References Telefone;
+ALTER TABLE Telefone
+ADD Constraint Telefone_Contato_FK
+Foreign Key (Contato_ID)
+References Contato;
 
 ALTER TABLE Telefone
 ADD Constraint Telefone_Operadora_FK

@@ -34,13 +34,13 @@ Values (21,
 		2);
 		
 		
-Insert Into Telefone (Numero, Operadora_ID)
+Insert Into Telefone (Numero, Contato_ID, Operadora_ID)
 Values (999451674,
+	(select top 1 Identificador from Contato),
 		(select Identificador from Operadora where Nome = 'Tim'));
 		
 		
-Insert Into Contato (Nome, Telefone_ID, DataInclusao, Cor)
-Values ('Marcos',
-		(select top 1 Identificador from Telefone),
+Insert Into Contato (Nome, DataInclusao, Cor)
+Values ('Josué Nunes',
 		GETDATE(),
 		'#01fabd');
