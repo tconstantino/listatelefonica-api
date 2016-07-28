@@ -1,6 +1,4 @@
 ﻿using ListaTelefonica.CrossCuting.DependencyInjection;
-using ListaTelefonica.Domain.Repository;
-using ListaTelefonica.Infrastructure.Context;
 
 namespace ListaTelefonica.CrossCuting.Factory
 {

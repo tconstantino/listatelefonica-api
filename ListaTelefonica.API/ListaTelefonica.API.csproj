@@ -182,7 +182,6 @@
     <Compile Include="Controllers\OperadoraController.cs" />
     <Compile Include="Controllers\TelefoneController.cs" />
     <Compile Include="Extensions\ApiControllerExtension.cs" />
-    <Compile Include="Extensions\JsonObjectExtension.cs" />
     <Compile Include="Extensions\Models\CategoriaExtension.cs" />
     <Compile Include="Extensions\Models\ContatoExtension.cs" />
     <Compile Include="Extensions\Models\OperadoraExtension.cs" />

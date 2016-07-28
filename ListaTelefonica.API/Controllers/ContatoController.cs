@@ -118,6 +118,8 @@ namespace ListaTelefonica.API.Controllers
                     contatos.Add(contatoRepository.ObterPeloID(id));
                 }
 
+                if (contatos.Count == 0) return this.NotFoundResponse(null, ids);
+
                 contatoCrudService = new ContatoCRUDService();
 
                 IList<Message> mensagens = contatoCrudService.Excluir(contatos, contatoRepository, contextoDB);

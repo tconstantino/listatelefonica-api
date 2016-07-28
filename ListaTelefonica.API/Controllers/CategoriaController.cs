@@ -107,6 +107,8 @@ namespace ListaTelefonica.API.Controllers
                     categorias.Add(repository.ObterPeloID(id));
                 }
                 
+                if(categorias.Count == 0) return this.NotFoundResponse(null, ids);
+
                 var crudService = new CategoriaCRUDService();
                 
                 IList<Message> mensagens = crudService.Excluir(categorias, repository, contextoDB);

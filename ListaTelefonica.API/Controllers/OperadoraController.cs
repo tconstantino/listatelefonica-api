@@ -106,6 +106,8 @@ namespace ListaTelefonica.API.Controllers
                     operadoras.Add(repository.ObterPeloID(id));
                 }
 
+                if (operadoras.Count == 0) return this.NotFoundResponse(null, ids);
+
                 var crudService = new OperadoraCRUDService();
 
                 IList<Message> mensagens = crudService.Excluir(operadoras, repository, contextoDB);
