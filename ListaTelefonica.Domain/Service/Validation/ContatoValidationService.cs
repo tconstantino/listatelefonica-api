@@ -26,6 +26,12 @@ namespace ListaTelefonica.Domain.Service.Validation
                     (String.Format(MessageResource.CampoObrigatorio, "Telefone")
                     , StatusMessageEnum.Error));
             }
+            else if (contato.Telefone.Operadora == null)
+            {
+                messages.Add(new Message
+                    (String.Format(MessageResource.CampoObrigatorio, "Operadora")
+                    , StatusMessageEnum.Error));
+            }
             if (String.IsNullOrWhiteSpace(contato.Cor))
             {
                 messages.Add(new Message

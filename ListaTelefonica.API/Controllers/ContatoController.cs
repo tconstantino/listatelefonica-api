@@ -104,7 +104,7 @@ namespace ListaTelefonica.API.Controllers
 
         // DELETE: api/Contato?id=5
         public HttpResponseMessage Delete([FromUri] int[] ids)
-        {
+        {           
             if (ids == null || ids.Length == 0) return this.NotFoundResponse(null, ids);
 
             using (IContextoDB contextoDB = ContextFactory.Create<IContextoDB>())
