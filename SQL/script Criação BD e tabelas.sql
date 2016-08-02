@@ -9,6 +9,11 @@ CREATE TABLE Contato(
 	Nome Varchar(100) not null,
 	DataInclusao Date not null,
 	Cor Varchar(30) not null
+	Serial Varchar(200),
+	DataNascimento Date,
+	CNPJ Bigint,
+	CPF Bigint,
+	CEP Int
 )
 
 CREATE TABLE Telefone(

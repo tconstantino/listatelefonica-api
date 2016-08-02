@@ -78,8 +78,8 @@ namespace ListaTelefonica.API.Controllers
 
                 if (mensagens.HasError()) return this.BadRequestResponse(mensagens, contato);
 
-                String location = string.Concat(this.Url.Request.RequestUri, "/", contatoDomain.Identificador);
-
+                String location = string.Concat(this.Request.RequestUri, "/", contatoDomain.Identificador);
+                
                 return this.CreatedResponse(mensagens, contatoDomain.ToModel(), location);
             }
         }
